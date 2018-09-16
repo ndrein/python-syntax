@@ -10,5 +10,7 @@ class Grammar:
             return '', ''
         elif self.alphabet == set():
             raise CharacterNotInAlphabet
+        elif set(s) != self.alphabet:
+            raise CharacterNotInAlphabet
         else:
-            return 'a', ''
+            return s[0], s[1:]
