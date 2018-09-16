@@ -1,9 +1,14 @@
+import enum
+
 import pytest
 
 from tests.character_not_in_alphabet import CharacterNotInAlphabet
 from tests.grammar import Grammar
 
-grammar = Grammar(states={1, 2}, start_state=1, accept_states={2}, alphabet={'a'}, transitions={(1, 'a'): 2})
+TokenType = enum.Enum('TokenType', 'A')
+
+grammar = Grammar(states={1, 2}, start_state=1, accept_states={2}, alphabet={'a'}, transitions={(1, 'a'): 2},
+                  accept_state_to_token_type={TokenType.A})
 
 
 def test_empty_string():
