@@ -12,7 +12,7 @@ class Grammar:
         self.start_state = start_state
         self.transitions = transitions
 
-    def tokenize(self, s):
+    def munch(self, s):
         if s == '':
             return None, ''
         elif not set(s).issubset(self.alphabet):

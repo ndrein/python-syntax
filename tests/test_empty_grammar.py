@@ -8,9 +8,9 @@ grammar = Grammar(states={1}, start_state=1, accept_states=set(), alphabet=set()
 
 
 def test_empty_string():
-    assert grammar.tokenize('') == (None, '')
+    assert grammar.munch('') == (None, '')
 
 
 def test_invalid_symbol():
     with pytest.raises(CharacterNotInAlphabet):
-        grammar.tokenize('a')
+        grammar.munch('a')
