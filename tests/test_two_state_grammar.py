@@ -2,8 +2,8 @@ from enum import Enum
 
 import pytest
 
-from tests.character_not_in_alphabet import CharacterNotInAlphabet
-from tests.grammar import Grammar, Token
+from syntax.character_not_in_alphabet import CharacterNotInAlphabet
+from syntax.grammar import Grammar, Token
 
 TokenType = Enum('TokenType', 'A')
 

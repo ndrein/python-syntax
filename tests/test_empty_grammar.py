@@ -1,7 +1,7 @@
 import pytest
 
-from tests.character_not_in_alphabet import CharacterNotInAlphabet
-from tests.grammar import Grammar
+from syntax.character_not_in_alphabet import CharacterNotInAlphabet
+from syntax.grammar import Grammar
 
 grammar = Grammar(states={1}, start_state=1, accept_states=set(), alphabet=set(), transitions={},
                   accept_state_to_token_type={})

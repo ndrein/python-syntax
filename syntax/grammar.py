@@ -1,6 +1,6 @@
 from collections import namedtuple
 
-from tests.character_not_in_alphabet import CharacterNotInAlphabet
+from syntax.character_not_in_alphabet import CharacterNotInAlphabet
 
 Token = namedtuple('Token', ['TokenType', 's'])
 
