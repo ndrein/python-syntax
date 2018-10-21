@@ -14,12 +14,9 @@ class Tokenizer:
         self.accept_states = accept_states
 
     def munch(self, s):
-        state = self.start_state
         for char in s:
             if char not in self.alphabet:
                 raise CharacterNotInAlphabet
-
-            state = self.transitions[state, char]
 
         if s == '':
             return None, ''
