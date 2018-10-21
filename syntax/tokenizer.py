@@ -21,11 +21,6 @@ class Tokenizer:
 
             state = self.transitions[state, char]
 
-        if state in self.accept_states:
-            return Token(self.accept_state_to_token_type[state], s), ''
-        else:
-            return None,
-
         # if not set(s).issubset(self.alphabet):
         #     raise CharacterNotInAlphabet
 
