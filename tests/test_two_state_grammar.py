@@ -17,7 +17,7 @@ def test_empty_string():
 
 @pytest.mark.skip
 def test_single_character():
-    assert grammar.munch('a') == (Token(TokenType.A, 'a'), '')
+    assert (Token(TokenType.A, 'a'), '') == grammar.munch('a')
 
 
 def test_invalid_character():
@@ -27,4 +27,4 @@ def test_invalid_character():
 
 @pytest.mark.skip
 def test_two_characters():
-    assert grammar.munch('aa') == (Token(TokenType.A, 'a'), 'a')
+    assert (Token(TokenType.A, 'a'), 'a') == grammar.munch('aa')
