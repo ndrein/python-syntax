@@ -7,8 +7,8 @@ from syntax.tokenizer import Tokenizer, Token
 
 TokenType = Enum('TokenType', 'A')
 
-grammar = Tokenizer(states={1, 2}, start_state=1, accept_states={2}, alphabet={'a'}, transitions={(1, 'a'): 2},
-                    accept_state_to_token_type={2: TokenType.A})
+grammar = Tokenizer(states={0, 1}, start_state=0, accept_states={1}, alphabet={'a'}, transitions={(0, 'a'): 1},
+                    accept_state_to_token_type={1: TokenType.A})
 
 
 def test_empty_string():
