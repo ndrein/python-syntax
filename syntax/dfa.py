@@ -14,10 +14,10 @@ class DFA:
 
     def traverse(self, s):
         state = self.start_state
-        index = -1
+        num_processed = 0
 
         for c in s:
-            index += 1
+            num_processed += 1
 
             if c not in self.alphabet:
                 raise CharacterNotInAlphabet
@@ -25,6 +25,6 @@ class DFA:
             state = self.transitions[state, c]
 
         if state in self.accept_states:
-            return state, index + 1
+            return state, num_processed
 
         return None
