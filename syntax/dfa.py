@@ -26,7 +26,5 @@ class DFA:
 
         if state in self.accept_states:
             return state, index + 1
-            # return Token(self.accept_state_to_token_type[state], s), ''
 
-        # return None, s
         return None
