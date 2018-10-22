@@ -1,10 +1,9 @@
 import pytest
 
 from syntax.character_not_in_alphabet import CharacterNotInAlphabet
-from syntax.tokenizer import Tokenizer
+from syntax.dfa import DFA
 
-grammar = Tokenizer(states={1}, start_state=1, accept_states=set(), alphabet=set(), transitions={},
-                    accept_state_to_token_type={})
+grammar = DFA(start_state=1, accept_states=set(), alphabet=set(), transitions={}, accept_state_to_token_type={})
 
 
 def test_empty_string():

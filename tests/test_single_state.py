@@ -1,7 +1,9 @@
-from syntax.tokenizer import Tokenizer
+from syntax.dfa import DFA
+import pytest
 
-tokenizer = Tokenizer({0}, 0, set(), {'a'}, {(0, 'a'): 0}, {})
+tokenizer = DFA(start_state=0, accept_states=set(), alphabet={'a'}, transitions={(0, 'a'): 0},
+                accept_state_to_token_type={})
 
 
 def test_a():
-    assert None is tokenizer.munch('a')
+    assert (None, 'a') == tokenizer.munch('a')
