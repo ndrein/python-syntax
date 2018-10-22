@@ -1,7 +1,5 @@
 from enum import Enum
 
-import pytest
-
 from syntax.dfa import DFA
 
 TokenType = Enum('TokenType', ['A'])
@@ -12,6 +10,5 @@ def test_a():
     assert (0, 1) == tokenizer.traverse('a')
 
 
-@pytest.mark.skip
 def test_aa():
     assert (0, 2) == tokenizer.traverse('aa')
