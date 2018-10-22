@@ -12,8 +12,8 @@ tokenizer = DFA(start_state=0, accept_states={0, 1}, alphabet={'a'}, transitions
 
 def test_invalid_character():
     with pytest.raises(CharacterNotInAlphabet):
-        tokenizer.munch('b')
+        tokenizer.traverse('b')
 
 
 def test_second_accept_state():
-    assert (Token(TokenType.B, 'a'), '') == tokenizer.munch('a')
+    assert (Token(TokenType.B, 'a'), '') == tokenizer.traverse('a')

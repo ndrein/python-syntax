@@ -4,4 +4,4 @@ tokenizer = DFA(start_state=0, accept_states=set(), alphabet={'a'}, transitions=
 
 
 def test_a():
-    assert None is tokenizer.munch('a')
+    assert None is tokenizer.traverse('a')

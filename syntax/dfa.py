@@ -12,7 +12,7 @@ class DFA:
         self.alphabet = alphabet
         self.transitions = transitions
 
-    def munch(self, s):
+    def traverse(self, s):
         state = self.start_state
         index = -1
 
