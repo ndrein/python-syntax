@@ -4,8 +4,7 @@ import pytest
 from enum import Enum
 
 TokenType = Enum('TokenType', ['A'])
-tokenizer = DFA(start_state=0, accept_states={0}, alphabet={'a'}, transitions={(0, 'a'): 0},
-                accept_state_to_token_type={0: TokenType.A})
+tokenizer = DFA(start_state=0, accept_states={0}, alphabet={'a'}, transitions={(0, 'a'): 0})
 
 
 def test_a():

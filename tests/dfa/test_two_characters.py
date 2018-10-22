@@ -4,7 +4,7 @@ from enum import Enum
 
 TokenType = Enum('TokenType', ['A', 'B'])
 
-grammar = DFA(0, {0, 1}, {'a', 'b'}, {(0, 'a'): 0, (0, 'b'): 1}, {0: TokenType.A, 1: TokenType.B})
+grammar = DFA(0, {0, 1}, {'a', 'b'}, {(0, 'a'): 0, (0, 'b'): 1})
 
 
 @pytest.mark.skip
