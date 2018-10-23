@@ -7,9 +7,9 @@ dfa = DFA(start_state=0, accept_states=set(), alphabet=set(), transitions={})
 
 
 def test_empty_string():
-    assert None == dfa.traverse('')
+    assert None is dfa.traverse('')
 
 
-def test_invalid_symbol():
+def test_invalid_character():
     with pytest.raises(CharacterNotInAlphabet):
         dfa.traverse('a')
