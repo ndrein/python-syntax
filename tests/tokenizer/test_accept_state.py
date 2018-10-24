@@ -3,7 +3,7 @@ from enum import Enum
 from syntax.tokenizer import Tokenizer, Token
 
 TokenType = Enum('TokenType', ['A'])
-tokenizer = Tokenizer(start_state=0, accept_states={0}, alphabet={'a'}, transitions={(0, 'a'): 0},
+tokenizer = Tokenizer(start_state=0, accept_states={0}, transitions={(0, 'a'): 0},
                       accept_state_to_token_type={0: TokenType.A})
 
 
