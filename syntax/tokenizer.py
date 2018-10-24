@@ -1,6 +1,6 @@
 from collections import namedtuple
 
-Token = namedtuple('Token', ['tokentype', 's'])
+Token = namedtuple('Token', ['tokenType', 's'])
 
 
 class Tokenizer:
