@@ -8,4 +8,11 @@ class Tokenizer:
         pass
 
     def tokenize(self, s):
+        for _ in s:
+            raise InvalidCharacterException
+
         return []
+
+
+class InvalidCharacterException(Exception):
+    pass
