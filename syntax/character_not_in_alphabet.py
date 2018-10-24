@@ -1,2 +1,0 @@
-class CharacterNotInAlphabet(Exception):
-    pass
