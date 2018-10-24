@@ -4,7 +4,7 @@ Token = namedtuple('Token', ['tokenType', 's'])
 
 
 class Tokenizer:
-    def __init__(self, start_state, accept_states, transitions, accept_state_to_token_type):
+    def __init__(self, transitions, start_state, accept_states, accept_state_to_token_type):
         self.start_state = start_state
         self.accept_states = accept_states
         self.transitions = transitions

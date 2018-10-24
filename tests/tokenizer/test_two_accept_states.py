@@ -6,7 +6,7 @@ from syntax.tokenizer import Tokenizer, InvalidCharacterException, Token
 
 TokenType = Enum('TokenType', ['A', 'B'])
 
-tokenizer = Tokenizer(start_state=0, accept_states={0, 1}, transitions={(0, 'a'): 1, (1, 'a'): 1},
+tokenizer = Tokenizer(transitions={(0, 'a'): 1, (1, 'a'): 1}, start_state=0, accept_states={0, 1},
                       accept_state_to_token_type={0: TokenType.A, 1: TokenType.B})
 
 
