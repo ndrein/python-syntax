@@ -1,8 +1,6 @@
 from collections import namedtuple
 
-from syntax.character_not_in_alphabet import CharacterNotInAlphabet
-
-Token = namedtuple('Token', ['TokenType', 's'])
+Token = namedtuple('Token', ['tokentype', 's'])
 
 
 class Tokenizer:
