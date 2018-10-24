@@ -1,18 +1,30 @@
 from collections import namedtuple
 
+from syntax.character_not_in_alphabet import CharacterNotInAlphabet
+
 Token = namedtuple('Token', ['TokenType', 's'])
 
 
 class Tokenizer:
-    def __init__(self, transitions, start_state, accept_states):
-        pass
+    def __init__(self, start_state, accept_states, alphabet, transitions):
+        self.start_state = start_state
+        self.accept_states = accept_states
+        self.alphabet = alphabet
+        self.transitions = transitions
 
-    def tokenize(self, s):
-        for _ in s:
-            raise InvalidCharacterException
+    def traverse(self, s):
+        state = self.start_state
+        num_processed = 0
 
-        return []
+        for c in s:
+            num_processed += 1
 
+            if c not in self.alphabet:
+                raise CharacterNotInAlphabet
 
-class InvalidCharacterException(Exception):
-    pass
+            state = self.transitions[state, c]
+
+        if state in self.accept_states:
+            return state, num_processed
+
+        return None

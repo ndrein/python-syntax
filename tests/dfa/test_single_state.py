@@ -1,6 +1,6 @@
-from syntax.dfa import DFA
+from syntax.tokenizer import Tokenizer
 
-tokenizer = DFA(start_state=0, accept_states=set(), alphabet={'a'}, transitions={(0, 'a'): 0})
+tokenizer = Tokenizer(start_state=0, accept_states=set(), alphabet={'a'}, transitions={(0, 'a'): 0})
 
 
 def test_a():

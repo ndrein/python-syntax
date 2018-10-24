@@ -3,11 +3,11 @@ from enum import Enum
 import pytest
 
 from syntax.character_not_in_alphabet import CharacterNotInAlphabet
-from syntax.dfa import DFA
+from syntax.tokenizer import Tokenizer
 
 TokenType = Enum('TokenType', ['A', 'B'])
 
-tokenizer = DFA(start_state=0, accept_states={0, 1}, alphabet={'a'}, transitions={(0, 'a'): 1, (1, 'a'): 1})
+tokenizer = Tokenizer(start_state=0, accept_states={0, 1}, alphabet={'a'}, transitions={(0, 'a'): 1, (1, 'a'): 1})
 
 
 def test_invalid_character():
