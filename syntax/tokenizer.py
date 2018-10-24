@@ -35,6 +35,14 @@ class Tokenizer:
 
         raise TokenNotFormedException
 
+    def tokenize(self, s):
+        """
+        :return: list of Tokens
+        :raises InvalidCharacterException if a character is encountered that leads to an invalid transition
+        :raises TokenNotFormedException if an accept state is not reached
+        """
+        pass
+
 
 class TokenNotFormedException(Exception):
     pass
