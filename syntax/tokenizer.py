@@ -4,8 +4,8 @@ Token = namedtuple('Token', ['TokenType', 's'])
 
 
 class Tokenizer:
-    def __init__(self, dfa, state_to_token_type):
+    def __init__(self, transitions, start_state, accept_states):
         pass
 
-    def munch(self, s):
-        pass
+    def tokenize(self, s):
+        return []
