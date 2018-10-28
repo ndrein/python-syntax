@@ -38,8 +38,7 @@ class Tokenizer:
     def tokenize(self, s):
         """
         :return: list of Tokens
-        :raises UnexpectedCharacterException if a character is encountered that leads to an invalid transition
-        :raises TokenNotFormedException if an accept state is not reached
+        :raises ValueError if the input could not be tokenized
         """
         pass
 
