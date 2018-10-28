@@ -40,7 +40,7 @@ class Tokenizer:
         :return: list of Tokens
         :raises ValueError if the input could not be tokenized
         """
-        pass
+        raise ValueError
 
 
 class TokenNotFormedException(Exception):
