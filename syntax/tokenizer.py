@@ -16,7 +16,7 @@ class Tokenizer:
         Then, continue to munch while the next characters transition to accept states.
 
         :return: Token, num of characters processed
-        :raises InvalidCharacterException if a character is encountered that leads to an invalid transition
+        :raises UnexpectedCharacterException if a character is encountered that leads to an invalid transition
         :raises TokenNotFormedException if an accept state is not reached
         """
         state = self.start_state
@@ -28,7 +28,7 @@ class Tokenizer:
             try:
                 state = self.transitions[state, c]
             except KeyError:
-                raise InvalidCharacterException
+                raise UnexpectedCharacterException
 
         if state in self.accept_states:
             return Token(self.accept_state_to_token_type[state], s), num_processed
@@ -38,7 +38,7 @@ class Tokenizer:
     def tokenize(self, s):
         """
         :return: list of Tokens
-        :raises InvalidCharacterException if a character is encountered that leads to an invalid transition
+        :raises UnexpectedCharacterException if a character is encountered that leads to an invalid transition
         :raises TokenNotFormedException if an accept state is not reached
         """
         pass
@@ -48,5 +48,5 @@ class TokenNotFormedException(Exception):
     pass
 
 
-class InvalidCharacterException(Exception):
+class UnexpectedCharacterException(Exception):
     pass

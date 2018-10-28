@@ -2,7 +2,7 @@ from enum import Enum
 
 import pytest
 
-from syntax.tokenizer import Tokenizer, InvalidCharacterException, Token
+from syntax.tokenizer import Tokenizer, UnexpectedCharacterException, Token
 
 TokenType = Enum('TokenType', ['A', 'B'])
 
@@ -11,7 +11,7 @@ tokenizer = Tokenizer(transitions={(0, 'a'): 1, (1, 'a'): 1}, start_state=0, acc
 
 
 def test_invalid_character():
-    with pytest.raises(InvalidCharacterException):
+    with pytest.raises(UnexpectedCharacterException):
         tokenizer.munch('b')
 
 
