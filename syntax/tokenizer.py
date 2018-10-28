@@ -40,7 +40,10 @@ class Tokenizer:
         :return: list of Tokens
         :raises ValueError if the input could not be tokenized
         """
-        raise ValueError
+        try:
+            return [self.munch(s)[0]]
+        except TokenNotFormedException:
+            raise ValueError
 
 
 class TokenNotFormedException(Exception):
