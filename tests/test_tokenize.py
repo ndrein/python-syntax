@@ -15,3 +15,8 @@ def test_empty_string_returns_valid_token():
     TokenType = Enum('TokenType', ['A'])
     tokenizer = Tokenizer({}, 0, {0}, {0: TokenType.A})
     assert [Token(TokenType.A, '')] == tokenizer.tokenize('')
+
+
+def test_unexpected_character():
+    with pytest.raises(ValueError):
+        Tokenizer({}, 0, set(), {}).tokenize('a')

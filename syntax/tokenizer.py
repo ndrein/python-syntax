@@ -42,7 +42,7 @@ class Tokenizer:
         """
         try:
             return [self.munch(s)[0]]
-        except TokenNotFormedException:
+        except (TokenNotFormedException, UnexpectedCharacterException):
             raise ValueError
 
 
