@@ -23,3 +23,15 @@ def test_literals():
 
 def test_not():
     assert 4 == _chain_lookups(LOGIC_DFA, 0, 'NOT')
+
+
+def test_and():
+    assert 7 == _chain_lookups(LOGIC_DFA, 0, 'AND')
+
+
+def test_or():
+    assert 9 == _chain_lookups(LOGIC_DFA, 0, 'OR')
+
+
+def test_implies():
+    assert 16 == _chain_lookups(LOGIC_DFA, 0, 'IMPLIES')
