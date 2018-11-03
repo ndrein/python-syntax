@@ -12,4 +12,4 @@ def test_munch_ends_after_nonempty_token():
 
 def test_munch_ends_if_no_transition_exists():
     tokenizer = Tokenizer({(0, 'a'): 1}, 0, {1}, {1: TokenType.A})
-    assert [Token(TokenType.A, 'a')] == tokenizer.tokenize('aa')
+    assert [Token(TokenType.A, 'a'), Token(TokenType.A, 'a')] == tokenizer.tokenize('aa')

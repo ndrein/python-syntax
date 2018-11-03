@@ -43,10 +43,17 @@ class Tokenizer:
     def _process_chars(self, s):
         state = self.start_state
         num_processed = 0
+        found_accept_state = False
 
         for c in s:
             try:
+                next_state = self.transitions[state, c]
+
+                if found_accept_state and next_state not in self.accept_states:
+                    break
                 state = self.transitions[state, c]
+                if state in self.accept_states:
+                    found_accept_state = True
             except KeyError:
                 if state in self.accept_states:
                     break
