@@ -7,9 +7,9 @@ tokenizer = Tokenizer(transitions={}, start_state=0, accept_states=set(), accept
 
 def test_empty_string():
     with pytest.raises(TokenNotFormedException):
-        tokenizer.munch('')
+        tokenizer._munch('')
 
 
 def test_invalid_character():
     with pytest.raises(UnexpectedCharacterException):
-        tokenizer.munch('a')
+        tokenizer._munch('a')

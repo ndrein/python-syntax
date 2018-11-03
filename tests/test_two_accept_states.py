@@ -9,8 +9,8 @@ tokenizer = Tokenizer(transitions={(0, 'a'): 1, (1, 'a'): 1}, start_state=0, acc
 
 
 def test_invalid_character_yields_valid_token():
-    assert Token(TokenType.A, ''), 0 == tokenizer.munch('b')
+    assert Token(TokenType.A, ''), 0 == tokenizer._munch('b')
 
 
 def test_second_accept_state():
-    assert Token(TokenType.A, 'a'), 1 == tokenizer.munch('a')
+    assert Token(TokenType.A, 'a'), 1 == tokenizer._munch('a')

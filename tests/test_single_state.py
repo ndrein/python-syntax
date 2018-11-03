@@ -7,4 +7,4 @@ tokenizer = Tokenizer(transitions={(0, 'a'): 0}, start_state=0, accept_states=se
 
 def test_a():
     with pytest.raises(TokenNotFormedException):
-        tokenizer.munch('a')
+        tokenizer._munch('a')
