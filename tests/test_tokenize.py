@@ -24,3 +24,9 @@ def test_two_tokens():
 def test_nonempty_string_gives_token_not_formed():
     with pytest.raises(ValueError):
         Tokenizer({(0, 'a'): 1}, 0, set(), {}).tokenize('a')
+
+
+def test_two_different_tokens():
+    TokenType = Enum('TokenType', ['A', 'B'])
+    tokenizer = Tokenizer({(0, 'a'): 1, (0, 'b'): 2}, 0, {1, 2}, {1: TokenType.A, 2: TokenType.B})
+    assert [Token(TokenType.A, 'a'), Token(TokenType.B, 'b')] == tokenizer.tokenize('ab')
