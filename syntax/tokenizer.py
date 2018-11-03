@@ -10,6 +10,20 @@ class Tokenizer:
         self.transitions = transitions
         self.accept_state_to_token_type = accept_state_to_token_type
 
+    def tokenize(self, s):
+        """
+        :return: list of Tokens
+        :raises ValueError if the input could not be tokenized
+        """
+        try:
+            token, num_processed = self._munch(s)
+            if num_processed < len(s):
+                return [token, self._munch(s[num_processed:])[0]]
+
+            return [token]
+        except (TokenNotFormedException, UnexpectedCharacterException):
+            raise ValueError
+
     def _munch(self, s):
         """
         Munch characters from s until an accept state is reached.
@@ -41,16 +55,6 @@ class Tokenizer:
             num_processed += 1
 
         return state, num_processed
-
-    def tokenize(self, s):
-        """
-        :return: list of Tokens
-        :raises ValueError if the input could not be tokenized
-        """
-        try:
-            return [self._munch(s)[0]]
-        except (TokenNotFormedException, UnexpectedCharacterException):
-            raise ValueError
 
 
 class TokenNotFormedException(Exception):

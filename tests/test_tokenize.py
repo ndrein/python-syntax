@@ -11,18 +11,12 @@ def test_empty_string_raises_error():
         tokenizer.tokenize('')
 
 
-def test_empty_string_returns_valid_token():
-    TokenType = Enum('TokenType', ['A'])
-    tokenizer = Tokenizer({}, 0, {0}, {0: TokenType.A})
-    assert [Token(TokenType.A, '')] == tokenizer.tokenize('')
-
-
 def test_unexpected_character():
     with pytest.raises(ValueError):
         Tokenizer({}, 0, set(), {}).tokenize('a')
 
 
-# def test_two_tokens():
-#     TokenType = Enum('TokenType', ['A'])
-#     tokenizer = Tokenizer({(0, 'a'): 1}, 0, {1}, {1: TokenType.A})
-#     assert [Token(TokenType.A, 'a'), Token(TokenType.A, 'a')] == tokenizer.tokenize('aa')
+def test_two_tokens():
+    TokenType = Enum('TokenType', ['A'])
+    tokenizer = Tokenizer({(0, 'a'): 1}, 0, {1}, {1: TokenType.A})
+    assert [Token(TokenType.A, 'a'), Token(TokenType.A, 'a')] == tokenizer.tokenize('aa')
