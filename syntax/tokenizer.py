@@ -33,14 +33,15 @@ class Tokenizer:
         :raises UnexpectedCharacterException if a character is encountered that leads to an invalid transition
         :raises TokenNotFormedException if an accept state is not reached
         """
-        state, num_processed = self._process_chars(s, self.start_state)
+        state, num_processed = self._process_chars(s)
 
         if state in self.accept_states:
             return Token(self.accept_state_to_token_type[state], s[:num_processed]), num_processed
 
         raise TokenNotFormedException
 
-    def _process_chars(self, s, state):
+    def _process_chars(self, s):
+        state = self.start_state
         num_processed = 0
 
         for c in s:
