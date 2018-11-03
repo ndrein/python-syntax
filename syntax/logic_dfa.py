@@ -2,7 +2,7 @@ from enum import Enum
 from itertools import count
 from string import ascii_lowercase
 
-TokenType = Enum('TokenType', ['LITERAL', 'NOT', 'AND', 'OR', 'IMPLIES', 'LPAREN', 'RPAREN', 'WHITESPACE'])
+TokenType = Enum('TokenType', ['LITERAL', 'NOT', 'AND', 'OR', 'IMPLIES', 'LPAREN', 'RPAREN', 'SPACE'])
 LOGIC_DFA = {}
 counter = count(0)
 
@@ -23,6 +23,9 @@ IMPLIES_4 = next(counter)
 IMPLIES_5 = next(counter)
 IMPLIES_6 = next(counter)
 IMPLIES_7 = next(counter)
+LPAREN = next(counter)
+RPAREN = next(counter)
+SPACE = next(counter)
 
 for a in ascii_lowercase:
     LOGIC_DFA[START, a] = LITERAL
@@ -46,3 +49,10 @@ LOGIC_DFA[IMPLIES_3, 'L'] = IMPLIES_4
 LOGIC_DFA[IMPLIES_4, 'I'] = IMPLIES_5
 LOGIC_DFA[IMPLIES_5, 'E'] = IMPLIES_6
 LOGIC_DFA[IMPLIES_6, 'S'] = IMPLIES_7
+
+LOGIC_DFA[START, '('] = LPAREN
+
+LOGIC_DFA[START, ')'] = RPAREN
+
+LOGIC_DFA[START, ' '] = SPACE
+LOGIC_DFA[SPACE, ' '] = SPACE
