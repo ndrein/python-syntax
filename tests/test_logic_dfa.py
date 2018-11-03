@@ -1,0 +1,25 @@
+from string import ascii_lowercase
+
+from syntax.logic_dfa import LOGIC_DFA
+
+
+def _chain_lookups(d, start_state, s):
+    """Starting from start_state, chain the lookups on d using the characters in s
+
+    E.g. _chain_lookups(d, 0, 'ab') == d[d[0, 'a'], 'b']
+    """
+    if len(s) == 1:
+        return d[start_state, s]
+
+    return d[_chain_lookups(d, start_state, s[:-1]), s[-1]]
+
+
+def test_literals():
+    assert 1 == LOGIC_DFA[0, 'a']
+    assert 1 == LOGIC_DFA[0, 'z']
+    assert 1 == LOGIC_DFA[LOGIC_DFA[0, 'a'], 'b']
+    assert 1 == _chain_lookups(LOGIC_DFA, 0, ascii_lowercase)
+
+
+def test_not():
+    assert 4 == _chain_lookups(LOGIC_DFA, 0, 'NOT')
