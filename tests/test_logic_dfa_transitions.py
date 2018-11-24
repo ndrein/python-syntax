@@ -1,6 +1,6 @@
 from string import ascii_lowercase
 
-from syntax.logic_dfa import transitions
+from syntax.logic_dfa import _transitions
 
 
 def _chain_lookups(d, start_state, s):
@@ -15,36 +15,36 @@ def _chain_lookups(d, start_state, s):
 
 
 def test_literals():
-    assert 1 == transitions[0, 'a']
-    assert 1 == transitions[0, 'z']
-    assert 1 == transitions[transitions[0, 'a'], 'b']
-    assert 1 == _chain_lookups(transitions, 0, ascii_lowercase)
+    assert 1 == _transitions[0, 'a']
+    assert 1 == _transitions[0, 'z']
+    assert 1 == _transitions[_transitions[0, 'a'], 'b']
+    assert 1 == _chain_lookups(_transitions, 0, ascii_lowercase)
 
 
 def test_not():
-    assert 4 == _chain_lookups(transitions, 0, 'NOT')
+    assert 4 == _chain_lookups(_transitions, 0, 'NOT')
 
 
 def test_and():
-    assert 7 == _chain_lookups(transitions, 0, 'AND')
+    assert 7 == _chain_lookups(_transitions, 0, 'AND')
 
 
 def test_or():
-    assert 9 == _chain_lookups(transitions, 0, 'OR')
+    assert 9 == _chain_lookups(_transitions, 0, 'OR')
 
 
 def test_implies():
-    assert 16 == _chain_lookups(transitions, 0, 'IMPLIES')
+    assert 16 == _chain_lookups(_transitions, 0, 'IMPLIES')
 
 
 def test_l_paren():
-    assert 17 == transitions[0, '(']
+    assert 17 == _transitions[0, '(']
 
 
 def test_r_paren():
-    assert 18 == transitions[0, ')']
+    assert 18 == _transitions[0, ')']
 
 
 def test_whitespace():
-    assert 19 == transitions[0, ' ']
-    assert 19 == _chain_lookups(transitions, 0, '  ')
+    assert 19 == _transitions[0, ' ']
+    assert 19 == _chain_lookups(_transitions, 0, '  ')
