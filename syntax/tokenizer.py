@@ -46,7 +46,7 @@ class Tokenizer:
         found_accept_state = False
 
         for c in s:
-            try:
+            if (state, c) in self.transitions:
                 next_state = self.transitions[state, c]
 
                 if found_accept_state and next_state not in self.accept_states:
@@ -54,7 +54,7 @@ class Tokenizer:
                 state = self.transitions[state, c]
                 if state in self.accept_states:
                     found_accept_state = True
-            except KeyError:
+            else:
                 if state in self.accept_states:
                     break
 
