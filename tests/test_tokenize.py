@@ -30,3 +30,10 @@ def test_two_different_tokens():
     TokenType = Enum('TokenType', ['A', 'B'])
     tokenizer = Tokenizer({(0, 'a'): 1, (0, 'b'): 2}, 0, {1, 2}, {1: TokenType.A, 2: TokenType.B})
     assert [Token(TokenType.A, 'a'), Token(TokenType.B, 'b')] == tokenizer.tokenize('ab')
+
+
+def test_three_tokens():
+    TokenType = Enum('TokenType', ['A'])
+    tokenizer = Tokenizer({(0, 'a'): 1}, 0, {1}, {1: TokenType.A})
+    token = Token(TokenType.A, 'a')
+    assert [token] * 3 == tokenizer.tokenize('aaa')
