@@ -14,6 +14,45 @@ def test_unexpected_character():
         Tokenizer({}, 0, set(), {}).tokenize('a')
 
 
+def test_accept_state_not_found():
+    tokenizer = Tokenizer(transitions={(0, 'a'): 0}, start_state=0, accept_states=set(), accept_state_to_token_type={})
+    with pytest.raises(ValueError):
+        tokenizer.tokenize('a')
+
+
+def test_single_token():
+    TokenType = Enum('TokenType', ['A'])
+    tokenizer = Tokenizer(transitions={(0, 'a'): 0}, start_state=0, accept_states={0},
+                          accept_state_to_token_type={0: TokenType.A})
+    assert [Token(TokenType.A, 'a')] == tokenizer.tokenize('a')
+
+
+def test_multi_char_token():
+    TokenType = Enum('TokenType', ['A'])
+    tokenizer = Tokenizer(transitions={(0, 'a'): 0}, start_state=0, accept_states={0},
+                          accept_state_to_token_type={0: TokenType.A})
+    assert [Token(TokenType.A, 'aa')] == tokenizer.tokenize('aa')
+
+
+def test_second_accept_state():
+    TokenType = Enum('TokenType', ['A', 'B'])
+    tokenizer = Tokenizer(transitions={(0, 'a'): 1, (1, 'a'): 1}, start_state=0, accept_states={0, 1},
+                          accept_state_to_token_type={0: TokenType.A, 1: TokenType.B})
+    assert [Token(TokenType.B, 'a')] == tokenizer.tokenize('a')
+
+
+def test_munch_ends_after_nonempty_token():
+    TokenType = Enum('TokenType', ['A'])
+    tokenizer = Tokenizer({(0, 'a'): 1, (1, 'a'): 2}, 0, {1}, {1: TokenType.A})
+    assert [Token(TokenType.A, 'a'), Token(TokenType.A, 'a')] == tokenizer.tokenize('aa')
+
+
+def test_munch_ends_if_no_transition_exists():
+    TokenType = Enum('TokenType', ['A'])
+    tokenizer = Tokenizer({(0, 'a'): 1}, 0, {1}, {1: TokenType.A})
+    assert [Token(TokenType.A, 'a'), Token(TokenType.A, 'a')] == tokenizer.tokenize('aa')
+
+
 def test_two_tokens():
     TokenType = Enum('TokenType', ['A'])
     tokenizer = Tokenizer({(0, 'a'): 1}, 0, {1}, {1: TokenType.A})
