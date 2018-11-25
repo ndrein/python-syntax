@@ -6,8 +6,7 @@ from syntax.tokenizer import Tokenizer, Token
 
 
 def test_empty_string_raises_error():
-    with pytest.raises(ValueError):
-        Tokenizer({}, 0, set(), {}).tokenize('')
+    assert [] == Tokenizer({}, 0, set(), {}).tokenize('')
 
 
 def test_unexpected_character():

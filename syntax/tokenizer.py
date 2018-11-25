@@ -16,11 +16,20 @@ class Tokenizer:
         :raises ValueError if the input could not be tokenized
         """
         try:
-            token, num_processed = self._munch(s)
-            if num_processed < len(s):
-                return [token, self._munch(s[num_processed:])[0]]
+            tokens = []
+            index = 0
+            while index < len(s):
+                token, num_processed = self._munch(s[index:])
+                index += num_processed
+                tokens.append(token)
 
-            return [token]
+            return tokens
+            #
+            # token, num_processed = self._munch(s)
+            # if num_processed < len(s):
+            #     return [token, self._munch(s[num_processed:])[0]]
+
+            # return [token]
         except (TokenNotFormedException, UnexpectedCharacterException):
             raise ValueError
 
