@@ -48,7 +48,7 @@ _transitions[SPACE, ' '] = SPACE
 
 logic_dfa = {'transitions': _transitions,
              'start_state': START,
-             'accept_states': {LITERAL, NOT[-1], AND[-2], OR[-1], IMPLIES[-1], LPAREN, RPAREN, SPACE},
+             'accept_states': {LITERAL, NOT[-1], AND[-1], OR[-1], IMPLIES[-1], LPAREN, RPAREN, SPACE},
              'accept_state_to_token_type': {LITERAL: TokenType.LITERAL, NOT[-1]: TokenType.NOT, AND[-1]: TokenType.AND,
                                             OR[-1]: TokenType.OR,
                                             IMPLIES[-1]: TokenType.IMPLIES, LPAREN: TokenType.LPAREN,
