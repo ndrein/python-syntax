@@ -8,6 +8,7 @@ class Dfa:
         """
         Traverse the Dfa by processing chars in s.
         If an accept state was encountered and no transition exists to an accept state immediately after, return
+
         :return: final state, number of characters processed
         :raises: UnexpectedCharacterException
         """

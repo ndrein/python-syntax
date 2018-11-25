@@ -13,8 +13,12 @@ class Tokenizer:
 
     def tokenize(self, s):
         """
-        :return: list of Tokens
-        :raises ValueError if the input could not be tokenized
+        Munch characters from s until an accept state is reached.
+        Then, continue to munch while the next characters transition to accept states.
+        If a new accept state can't be reached, emit a token
+
+        :return: list of Token
+        :raises: ValueError if a Token can't be formed from some characters
         """
         try:
             return self._tokenize(s)
@@ -33,14 +37,6 @@ class Tokenizer:
         return tokens
 
     def _munch(self, s):
-        """
-        Munch characters from s until an accept state is reached.
-        Then, continue to munch while the next characters transition to accept states.
-
-        :return: Token, num of characters processed
-        :raises UnexpectedCharacterException if a character is encountered that leads to an invalid transition
-        :raises TokenNotFormedException if an accept state is not reached
-        """
         state, num_processed = self.dfa_traverser.process(s)
 
         if state in self.accept_states:
@@ -51,5 +47,3 @@ class Tokenizer:
 
 class TokenNotFormedException(Exception):
     pass
-
-
