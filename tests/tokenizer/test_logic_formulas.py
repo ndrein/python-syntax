@@ -14,7 +14,7 @@ def test_literal():
 
 
 def test_literal_and_operator():
-    assert [Token(TokenType.LITERAL, 'a'), Token(TokenType, ' ')] == tokenizer.tokenize('a ')
+    assert [Token(TokenType.LITERAL, 'a'), Token(TokenType.SPACE, ' ')] == tokenizer.tokenize('a ')
 
 
 def test_lowercase_operators():
