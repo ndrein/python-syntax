@@ -20,6 +20,7 @@ class Tokenizer:
         :return: list of Token
         :raises: ValueError if a Token can't be formed from some characters
         """
+        # TODO: yield tokens
         try:
             return self._tokenize(s)
         except (TokenNotFormedException, UnexpectedCharacterException):

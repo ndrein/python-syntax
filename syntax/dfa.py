@@ -12,6 +12,7 @@ class Dfa:
         :return: final state, number of characters processed
         :raises: UnexpectedCharacterException
         """
+        # TODO: use inner class, or reduce method size
         state = self.start_state
         num_processed = 0
         found_accept_state = False
