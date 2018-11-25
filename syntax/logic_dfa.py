@@ -2,8 +2,6 @@ from enum import Enum
 from itertools import count
 from string import ascii_lowercase
 
-from syntax.dfa import Dfa
-
 TokenType = Enum('TokenType', ['LITERAL', 'NOT', 'AND', 'OR', 'IMPLIES', 'LPAREN', 'RPAREN', 'SPACE'])
 _transitions = {}
 _counter = count(0)
@@ -48,7 +46,11 @@ _transitions[START, ')'] = RPAREN
 _transitions[START, ' '] = SPACE
 _transitions[SPACE, ' '] = SPACE
 
-logic_dfa = Dfa(_transitions, START, {LITERAL, NOT[-1], AND[-2], OR[-1], IMPLIES[-1], LPAREN, RPAREN, SPACE},
-                {LITERAL: TokenType.LITERAL, NOT[-1]: TokenType.NOT, AND[-1]: TokenType.AND, OR[-1]: TokenType.OR,
-                 IMPLIES[-1]: TokenType.IMPLIES, LPAREN: TokenType.LPAREN, RPAREN: TokenType.RPAREN,
-                 SPACE: TokenType.SPACE})
+logic_dfa = {'transitions': _transitions,
+             'start_state': START,
+             'accept_states': {LITERAL, NOT[-1], AND[-2], OR[-1], IMPLIES[-1], LPAREN, RPAREN, SPACE},
+             'accept_state_to_token_type': {LITERAL: TokenType.LITERAL, NOT[-1]: TokenType.NOT, AND[-1]: TokenType.AND,
+                                            OR[-1]: TokenType.OR,
+                                            IMPLIES[-1]: TokenType.IMPLIES, LPAREN: TokenType.LPAREN,
+                                            RPAREN: TokenType.RPAREN,
+                                            SPACE: TokenType.SPACE}}

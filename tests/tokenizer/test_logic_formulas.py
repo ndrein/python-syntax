@@ -1,8 +1,8 @@
 from syntax.logic_dfa import logic_dfa, TokenType
 from syntax.tokenizer import Tokenizer, Token
 
-tokenizer = Tokenizer(logic_dfa.transitions, logic_dfa.start_state, logic_dfa.accept_states,
-                      logic_dfa.accept_state_to_token_type)
+tokenizer = Tokenizer(logic_dfa['transitions'], logic_dfa['start_state'], logic_dfa['accept_states'],
+                      logic_dfa['accept_state_to_token_type'])
 
 
 def test_space():
