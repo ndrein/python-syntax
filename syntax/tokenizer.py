@@ -7,7 +7,7 @@ Token = namedtuple('Token', ['tokenType', 's'])
 
 class Tokenizer:
     def __init__(self, transitions, start_state, accept_states, accept_state_to_token_type):
-        self.dfa_traverser = Dfa(transitions, start_state, accept_states)
+        self.dfa = Dfa(transitions, start_state, accept_states)
         self.accept_states = accept_states
         self.accept_state_to_token_type = accept_state_to_token_type
 
@@ -32,7 +32,7 @@ class Tokenizer:
             raise ValueError
 
     def _munch(self, s):
-        state, num_processed = self.dfa_traverser.process(s)
+        state, num_processed = self.dfa.process(s)
 
         if state in self.accept_states:
             return Token(self.accept_state_to_token_type[state], s[:num_processed]), num_processed
