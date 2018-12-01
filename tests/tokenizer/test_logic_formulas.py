@@ -6,15 +6,15 @@ tokenizer = Tokenizer(logic_dfa['transitions'], logic_dfa['start_state'], logic_
 
 
 def test_space():
-    assert [Token(TokenType.SPACE, ' ')] == tokenizer.tokenize(' ')
+    assert [Token(TokenType.SPACE, ' ')] == list(tokenizer.tokenize(' '))
 
 
 def test_literal():
-    assert [Token(TokenType.LITERAL, 'a')] == tokenizer.tokenize('a')
+    assert [Token(TokenType.LITERAL, 'a')] == list(tokenizer.tokenize('a'))
 
 
 def test_literal_and_operator():
-    assert [Token(TokenType.LITERAL, 'a'), Token(TokenType.SPACE, ' ')] == tokenizer.tokenize('a ')
+    assert [Token(TokenType.LITERAL, 'a'), Token(TokenType.SPACE, ' ')] == list(tokenizer.tokenize('a '))
 
 
 def test_lowercase_operator_literals():
@@ -24,7 +24,7 @@ def test_lowercase_operator_literals():
     or_ = Token(TokenType.LITERAL, 'or')
     implies = Token(TokenType.LITERAL, 'implies')
 
-    assert [not_, space, and_, space, or_, space, implies] == tokenizer.tokenize('not and or implies')
+    assert [not_, space, and_, space, or_, space, implies] == list(tokenizer.tokenize('not and or implies'))
 
 
 def test_operators():
@@ -34,15 +34,15 @@ def test_operators():
     or_ = Token(TokenType.OR, 'OR')
     implies = Token(TokenType.IMPLIES, 'IMPLIES')
 
-    assert [not_, space, and_, space, or_, space, implies] == tokenizer.tokenize('NOT AND OR IMPLIES')
+    assert [not_, space, and_, space, or_, space, implies] == list(tokenizer.tokenize('NOT AND OR IMPLIES'))
 
 
 def test_lparen():
-    assert [Token(TokenType.LPAREN, '(')] == tokenizer.tokenize('(')
+    assert [Token(TokenType.LPAREN, '(')] == list(tokenizer.tokenize('('))
 
 
 def test_rparen():
-    assert [Token(TokenType.RPAREN, ')')] == tokenizer.tokenize(')')
+    assert [Token(TokenType.RPAREN, ')')] == list(tokenizer.tokenize(')'))
 
 
 def test_logical_formula():
@@ -57,4 +57,4 @@ def test_logical_formula():
     r = Token(TokenType.LITERAL, 'r')
 
     assert [lparen, p, space, and_, space, q, rparen, space, implies, space, lparen, not_, space, r, rparen] == \
-           tokenizer.tokenize('(p AND q) IMPLIES (NOT r)')
+           list(tokenizer.tokenize('(p AND q) IMPLIES (NOT r)'))

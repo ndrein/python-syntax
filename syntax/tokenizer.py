@@ -20,22 +20,16 @@ class Tokenizer:
         :return: list of Token
         :raises: ValueError if a Token can't be formed from some characters
         """
-        # TODO: yield tokens
         try:
-            return self._tokenize(s)
+            index = 0
+
+            while index < len(s):
+                token, num_processed = self._munch(s[index:])
+                index += num_processed
+
+                yield token
         except (TokenNotFormedException, UnexpectedCharacterException):
             raise ValueError
-
-    def _tokenize(self, s):
-        tokens = []
-        index = 0
-
-        while index < len(s):
-            token, num_processed = self._munch(s[index:])
-            index += num_processed
-            tokens.append(token)
-
-        return tokens
 
     def _munch(self, s):
         state, num_processed = self.dfa_traverser.process(s)
