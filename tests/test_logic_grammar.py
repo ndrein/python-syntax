@@ -1,8 +1,12 @@
+import pytest
 from lark import Lark
+from lark.exceptions import UnexpectedCharacters, ParseError
 
 from syntax.logic_grammar import LOGIC_GRAMMAR
 
-START = 'start'
+START = 'statement'
+
+grammar = Lark(LOGIC_GRAMMAR, start=START)
 
 
 def test_hello_world():
@@ -13,10 +17,23 @@ def test_hello_world():
             ''').parse('Hello, World!')
 
 
-def test_parse_logic_grammar():
-    Lark(LOGIC_GRAMMAR)
-
-
 def test_parse_p():
-    tree = Lark(LOGIC_GRAMMAR).parse('p')
+    tree = grammar.parse('p')
     assert START == tree.data
+    assert ['p'] == tree.children
+
+
+def test_long_literal():
+    s = 'aweoriquwpeoiuasdfnxcvn'
+    assert [s] == grammar.parse(s).children
+
+
+def test_unexpected_characters():
+    for c in ('A', '-'):
+        with pytest.raises(UnexpectedCharacters):
+            grammar.parse(c)
+
+
+def test_space_gives_parse_error():
+    with pytest.raises(ParseError):
+        grammar.parse(' ')

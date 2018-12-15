@@ -1,3 +1,6 @@
 LOGIC_GRAMMAR = '''
-start: "p" 
+statement: /[a-z]+/ 
+
+%import common.WS
+%ignore WS
 '''
