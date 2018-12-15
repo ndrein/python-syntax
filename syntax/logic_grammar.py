@@ -1,0 +1,3 @@
+LOGIC_GRAMMAR = '''
+start: 
+'''
