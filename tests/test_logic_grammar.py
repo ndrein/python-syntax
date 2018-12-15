@@ -29,7 +29,7 @@ def test_long_literal():
 
 
 def test_unexpected_characters():
-    for c in ('A', '-'):
+    for c in ('A', '-', '1'):
         with pytest.raises(UnexpectedCharacters):
             grammar.parse(c)
 
