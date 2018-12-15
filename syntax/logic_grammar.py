@@ -1,3 +1,3 @@
 LOGIC_GRAMMAR = '''
-start: 
+start: "p" 
 '''

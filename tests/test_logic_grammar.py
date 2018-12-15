@@ -2,6 +2,8 @@ from lark import Lark
 
 from syntax.logic_grammar import LOGIC_GRAMMAR
 
+START = 'start'
+
 
 def test_hello_world():
     Lark('''start: WORD "," WORD "!"
@@ -13,3 +15,8 @@ def test_hello_world():
 
 def test_parse_logic_grammar():
     Lark(LOGIC_GRAMMAR)
+
+
+def test_parse_p():
+    tree = Lark(LOGIC_GRAMMAR).parse('p')
+    assert START == tree.data
