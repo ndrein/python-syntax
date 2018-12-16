@@ -70,3 +70,15 @@ def test_double_negation():
 
 def test_or():
     single_connective_test(grammar.parse('(pORq)'), 'or', ['p', 'q'])
+
+
+def test_or_and_not():
+    tree = grammar.parse('(p OR (NOT q))')
+    or_node = tree.children[0]
+    assert 'or' == or_node.data
+    assert 'p' == or_node.children[0].children[0]
+    single_connective_test(or_node.children[1], 'not', ['q'])
+
+
+def test_and():
+    single_connective_test(grammar.parse('(p AND q)'), 'and', ['p', 'q'])
