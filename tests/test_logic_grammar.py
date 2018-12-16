@@ -100,3 +100,8 @@ def assert_matches(target: Union[str, Sequence], statement: Tree):
 
         for subtarget, child in zip(target[1:], rule_node.children):
             assert_matches(subtarget, child)
+
+
+def test_and_or_not_implies_iff():
+    assert_matches(('and', 'a', ('or', ('not', 'b'), ('implies', ('iff', 'c', 'd'), 'e'))),
+                   grammar.parse('(a AND ((NOT b) OR ((c IFF d) IMPLIES e)))'))
