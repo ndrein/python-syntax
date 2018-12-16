@@ -1,4 +1,5 @@
-from typing import Iterable
+from typing import Iterable, Union
+from typing import Sequence
 
 import pytest
 from lark import Lark
@@ -20,15 +21,13 @@ def test_hello_world():
             ''').parse('Hello, World!')
 
 
-def test_parse_p():
-    tree = grammar.parse('p')
-    assert START == tree.data
-    assert ['p'] == tree.children
+def test_parse_literal():
+    assert_matches('p', grammar.parse('p'))
 
 
 def test_long_literal():
     s = 'aweoriquwpeoiuasdfnxcvn'
-    assert [s] == grammar.parse(s).children
+    assert_matches(s, grammar.parse(s))
 
 
 def test_unexpected_characters():
@@ -43,7 +42,7 @@ def test_space_gives_parse_error():
 
 
 def test_literal_with_whitespace():
-    assert ['p'] == grammar.parse('  p ').children
+    assert_matches('p', grammar.parse('  p '))
 
 
 def single_connective_test(root: Tree, rule_name: str, literals: Iterable[str]):
@@ -54,47 +53,50 @@ def single_connective_test(root: Tree, rule_name: str, literals: Iterable[str]):
 
 
 def test_not_without_whitespace():
-    single_connective_test(grammar.parse('(NOTp)'), 'not', ['p'])
+    assert_matches(('not', 'p'), grammar.parse('(NOTp)'))
 
 
 def test_not_with_whitespace():
-    single_connective_test(grammar.parse('  (NOT p ) '), 'not', ['p'])
+    assert_matches(('not', 'p'), grammar.parse('  (NOT p ) '))
 
 
 def test_double_negation():
-    tree = grammar.parse('(NOT (NOT p))')
-    not_node_1 = tree.children[0]
-    assert 'not' == not_node_1.data
-    single_connective_test(not_node_1.children[0], 'not', ['p'])
+    assert_matches(('not', ('not', 'p')), grammar.parse('(NOT (NOT p))'))
 
 
 def test_or():
-    single_connective_test(grammar.parse('(pORq)'), 'or', ['p', 'q'])
+    assert_matches(('or', 'p', 'q'), grammar.parse('(p OR q)'))
 
 
 def test_or_and_not():
-    tree = grammar.parse('(p OR (NOT q))')
-    or_node = tree.children[0]
-    assert 'or' == or_node.data
-    assert ['p'] == or_node.children[0].children
-    single_connective_test(or_node.children[1], 'not', ['q'])
+    assert_matches(('or', 'p', ('not', 'q')), grammar.parse('(p OR (NOT q))'))
 
 
 def test_and():
-    single_connective_test(grammar.parse('(p AND q)'), 'and', ['p', 'q'])
+    assert_matches(('and', 'p', 'q'), grammar.parse('(p AND q)'))
 
 
 def test_and_or():
-    tree = grammar.parse('((p OR q) AND r)')
-    and_node = tree.children[0]
-    assert 'and' == and_node.data
-    single_connective_test(and_node.children[0], 'or', ['p', 'q'])
-    assert ['r'] == and_node.children[1].children
+    assert_matches(('and', ('or', 'p', 'q'), 'r'), grammar.parse('((p OR q) AND r)'))
 
 
 def test_implies():
-    single_connective_test(grammar.parse('(p IMPLIES q)'), 'implies', ['p', 'q'])
+    assert_matches(('implies', 'p', 'q'), grammar.parse('(p IMPLIES q)'))
 
 
 def test_iff():
-    single_connective_test(grammar.parse('(p IFF q)'), 'iff', ('p', 'q'))
+    assert_matches(('iff', 'p', 'q'), grammar.parse('(p IFF q)'))
+
+
+def assert_matches(target: Union[str, Sequence], statement: Tree):
+    assert 1 == len(statement.children)
+
+    if isinstance(target, str):
+        assert [target] == statement.children
+    else:
+        connective_name = target[0]
+        rule_node = statement.children[0]
+        assert connective_name == rule_node.data
+
+        for subtarget, child in zip(target[1:], rule_node.children):
+            assert_matches(subtarget, child)
