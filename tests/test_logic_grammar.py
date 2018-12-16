@@ -76,9 +76,17 @@ def test_or_and_not():
     tree = grammar.parse('(p OR (NOT q))')
     or_node = tree.children[0]
     assert 'or' == or_node.data
-    assert 'p' == or_node.children[0].children[0]
+    assert ['p'] == or_node.children[0].children
     single_connective_test(or_node.children[1], 'not', ['q'])
 
 
 def test_and():
     single_connective_test(grammar.parse('(p AND q)'), 'and', ['p', 'q'])
+
+
+def test_and_or():
+    tree = grammar.parse('((p OR q) AND r)')
+    and_node = tree.children[0]
+    assert 'and' == and_node.data
+    single_connective_test(and_node.children[0], 'or', ['p', 'q'])
+    assert ['r'] == and_node.children[1].children
