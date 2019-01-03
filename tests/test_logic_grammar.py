@@ -8,9 +8,7 @@ from lark.exceptions import UnexpectedCharacters, ParseError
 
 from syntax.logic_grammar import LOGIC_GRAMMAR
 
-START = 'statement'
-
-grammar = Lark(LOGIC_GRAMMAR, start=START)
+grammar = Lark(LOGIC_GRAMMAR)
 
 
 def test_hello_world():
@@ -81,14 +79,14 @@ def test_iff():
     assert_matches(('iff', 'p', 'q'), grammar.parse('(p IFF q)'))
 
 
-def assert_matches(target: Union[str, Sequence], statement: Tree):
-    assert 1 == len(statement.children)
+def assert_matches(target: Union[str, Sequence], tree: Tree):
+    assert 1 == len(tree.children)
 
     if isinstance(target, str):
-        assert [target] == statement.children
+        assert [target] == tree.children
     else:
         connective_name = target[0]
-        rule_node = statement.children[0]
+        rule_node = tree.children[0]
         assert connective_name == rule_node.data
 
         for subtarget, child in zip(target[1:], rule_node.children):
