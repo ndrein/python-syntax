@@ -1,5 +1,5 @@
-from typing import Iterable, Union
 from typing import Sequence
+from typing import Union
 
 import pytest
 from lark import Lark
@@ -43,13 +43,6 @@ def test_space_gives_parse_error():
 
 def test_literal_with_whitespace():
     assert_matches('p', grammar.parse('  p '))
-
-
-def single_connective_test(root: Tree, rule_name: str, literals: Iterable[str]):
-    rule_node = root.children[0]
-    assert rule_name == rule_node.data
-    for literal, statement in zip(literals, rule_node.children):
-        assert literal == statement.children[0]
 
 
 def test_not_without_whitespace():
