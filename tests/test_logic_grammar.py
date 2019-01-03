@@ -78,16 +78,12 @@ def test_iff():
 
 
 def assert_matches(target: Union[str, Sequence], tree: Tree):
-    assert 1 == len(tree.children)
-
     if isinstance(target, str):
-        assert [target] == tree.children
+        assert target == tree
     else:
-        connective_name = target[0]
-        rule_node = tree.children[0]
-        assert connective_name == rule_node.data
+        assert target[0] == tree.data
 
-        for subtarget, child in zip(target[1:], rule_node.children):
+        for subtarget, child in zip(target[1:], tree.children):
             assert_matches(subtarget, child)
 
 
