@@ -2,7 +2,7 @@ from enum import Enum
 
 import pytest
 
-from syntax.tokenizer import Tokenizer, Token
+from syntax.tokenizer.tokenizer import Tokenizer, Token
 
 A_TOKEN_TYPE = Enum('TokenType', ['A'])
 AB_TOKEN_TYPE = Enum('TokenType', ['A', 'B'])

@@ -1,6 +1,6 @@
 from collections import namedtuple
 
-from syntax.dfa import Dfa, UnexpectedCharacterException
+from syntax.tokenizer.dfa import Dfa, UnexpectedCharacterException
 
 Token = namedtuple('Token', ['tokenType', 's'])
 
