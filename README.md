@@ -1,6 +1,6 @@
 # python-syntax
 
-Python implementation of parsing.
+Python implementation of tokenization.
 
 
 # Installation
